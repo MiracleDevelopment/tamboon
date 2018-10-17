@@ -16,6 +16,7 @@ buildscript {
         threetenbpVersion = '1.3.6'
         androidSupportVersion = '28.0.0'
         coroutineVersion = '0.26.0'
+        glideVersion = '4.8.0'
     }
 
     repositories {

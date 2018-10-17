@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">tamboon</string>
+    <string name="default_error_message">There are something when wrong, please try again later</string>
 </resources>
