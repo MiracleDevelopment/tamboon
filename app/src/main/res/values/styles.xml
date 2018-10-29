@@ -10,4 +10,12 @@
 
     <style name="BaseTheme" parent="AppTheme"/>
 
+    <style name="ProgressDialogTheme" parent="BaseTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimAmount">0.7</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
 </resources>
