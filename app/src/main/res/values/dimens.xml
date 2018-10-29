@@ -4,7 +4,6 @@
     <dimen name="padding_margin_16">16dp</dimen>
     <dimen name="padding_margin_4">4dp</dimen>
     <dimen name="margin_padding_32">32dp</dimen>
-    <dimen name="text_size_18">18sp</dimen>
     <dimen name="padding_margin_12">12dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
 </resources>
