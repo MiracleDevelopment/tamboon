@@ -3,7 +3,7 @@ package com.iamwee.tamboon.data.repository
 import com.iamwee.tamboon.common.ClientErrorException
 import com.iamwee.tamboon.common.NetworkConnectionException
 import com.iamwee.tamboon.common.ServerException
-import com.iamwee.tamboon.data.DonateRequest
+import com.iamwee.tamboon.data.DonationRequest
 import com.iamwee.tamboon.data.DonationErrorBody
 import com.iamwee.tamboon.data.DonationResponse
 import com.iamwee.tamboon.http.HttpManager
@@ -16,7 +16,7 @@ class DefaultDonationRepository(
     private val service: TamboonService
 ) : DonationRepository {
 
-    override fun donate(request: DonateRequest): DonationResponse {
+    override fun donate(request: DonationRequest): DonationResponse {
         if (handler.isConnected == true) {
             return request(service.donate(request), DonationResponse(false))
         } else {
@@ -49,6 +49,6 @@ class DefaultDonationRepository(
 
 interface DonationRepository {
 
-    fun donate(request: DonateRequest): DonationResponse
+    fun donate(request: DonationRequest): DonationResponse
 
 }

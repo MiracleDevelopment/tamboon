@@ -9,7 +9,7 @@ import com.iamwee.tamboon.base.BaseViewModel
 import com.iamwee.tamboon.common.Event
 import com.iamwee.tamboon.common.error
 import com.iamwee.tamboon.common.success
-import com.iamwee.tamboon.data.DonateRequest
+import com.iamwee.tamboon.data.DonationRequest
 import com.iamwee.tamboon.data.repository.DefaultDonationRepository
 import com.iamwee.tamboon.domain.DonateUseCase
 import com.iamwee.tamboon.http.HttpManager
@@ -25,7 +25,7 @@ class DonationViewModel(
     val donationSuccessEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
 
     fun donate(token: Token, amount: Long) {
-        val request = DonateRequest(
+        val request = DonationRequest(
             name = token.card.name,
             token = token.id,
             amount = amount

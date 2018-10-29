@@ -1,7 +1,7 @@
 package com.iamwee.tamboon.http
 
 import com.iamwee.tamboon.data.Charity
-import com.iamwee.tamboon.data.DonateRequest
+import com.iamwee.tamboon.data.DonationRequest
 import com.iamwee.tamboon.data.DonationResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,6 +14,6 @@ interface TamboonService {
     fun getCharities(): Call<List<Charity>>
 
     @POST("donations")
-    fun donate(@Body body: DonateRequest): Call<DonationResponse>
+    fun donate(@Body body: DonationRequest): Call<DonationResponse>
 
 }

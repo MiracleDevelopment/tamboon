@@ -1,7 +1,7 @@
 package com.iamwee.tamboon
 
 import com.iamwee.tamboon.data.Charity
-import com.iamwee.tamboon.data.DonateRequest
+import com.iamwee.tamboon.data.DonationRequest
 
 object DataTest {
 
@@ -12,7 +12,7 @@ object DataTest {
             Charity(3, "Makhampom", "http://www.makhampom.net/makhampom/ppcms/uploads/UserFiles/Image/Thai/T14Publice/2554/January/Newyear/logoweb.jpg")
     )
 
-    val correctCard = DonateRequest(
+    val correctCard = DonationRequest(
         name = "John Weak",
         token = "token_12d1wl_dakl;sdk",
         amount = 50000

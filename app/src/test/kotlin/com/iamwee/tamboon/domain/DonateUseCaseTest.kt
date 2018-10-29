@@ -2,7 +2,7 @@ package com.iamwee.tamboon.domain
 
 import com.iamwee.tamboon.DataTest
 import com.iamwee.tamboon.FakeDanationRepository
-import com.iamwee.tamboon.data.DonateRequest
+import com.iamwee.tamboon.data.DonationRequest
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -22,7 +22,7 @@ class DonateUseCaseTest {
         val name = "Awesome name"
         val token = "Awesome token"
         val amount = 50_000L
-        val request = DonateRequest(
+        val request = DonationRequest(
             name = name,
             token = token,
             amount = amount
@@ -36,7 +36,7 @@ class DonateUseCaseTest {
     @Test
     fun `donate with incorrect token then donation should not success`() {
         val result = runBlocking { useCase.execute(
-            DonateRequest(
+            DonationRequest(
                 name = "awesome name",
                 token = "some incorrect token that taken from omise public token",
                 amount = 4000
