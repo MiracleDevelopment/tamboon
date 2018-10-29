@@ -75,6 +75,7 @@ val Exception.errorMessage: String
     get() = when (this) {
         is NetworkConnectionException -> this.message
         is ServerException -> this.message
+        is ClientErrorException -> this.message
         else -> {
             if (BuildConfig.DEBUG) {
                 this.localizedMessage

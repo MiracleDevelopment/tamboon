@@ -11,10 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.iamwee.tamboon.R
 import com.iamwee.tamboon.base.BaseFragment
-import com.iamwee.tamboon.common.observe
-import com.iamwee.tamboon.common.observeEvent
-import com.iamwee.tamboon.common.textString
-import com.iamwee.tamboon.common.viewModelProvider
+import com.iamwee.tamboon.common.*
 import com.iamwee.tamboon.data.Charity
 import com.iamwee.tamboon.ui.donation.complete.DonationCompleteActivity
 import com.iamwee.tamboon.utils.CurrencyFormatter
@@ -83,7 +80,7 @@ class DonationFragment : BaseFragment() {
     }
 
     private fun handleFailure(e: Exception?) {
-        val errorMessage = e?.message ?: e?.localizedMessage ?: return
+        val errorMessage = e?.errorMessage ?: return
         AlertDialog.Builder(requireContext())
             .setMessage(errorMessage)
             .setPositiveButton(android.R.string.ok, null)
