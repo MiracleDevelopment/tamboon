@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">tamboon</string>
     <string name="default_error_message">There are something when wrong, please try again later</string>
+    <string name="button_donation" formatted="false">Donate %s Baht</string>
+    <string name="label_amount_donation">Amount</string>
+    <string name="label_donation_to" formatted="false">Donation to %s</string>
+    <string name="button_please_fill_donation_amount">Please fill amount for donation</string>
 </resources>

@@ -7,6 +7,7 @@ import com.iamwee.tamboon.R
 import com.iamwee.tamboon.base.BaseFragment
 import com.iamwee.tamboon.common.*
 import com.iamwee.tamboon.data.Charity
+import com.iamwee.tamboon.ui.donation.DonationActivity
 import kotlinx.android.synthetic.main.fragment_charity_list.*
 
 class CharityListFragment : BaseFragment() {
@@ -22,9 +23,7 @@ class CharityListFragment : BaseFragment() {
     }
 
     private val adapter by lazy {
-        CharityListAdapter {
-
-        }
+        CharityListAdapter { DonationActivity.launch(requireContext(), it) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
