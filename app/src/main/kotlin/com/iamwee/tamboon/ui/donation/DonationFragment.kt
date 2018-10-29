@@ -14,9 +14,7 @@ import com.iamwee.tamboon.base.BaseFragment
 import com.iamwee.tamboon.common.*
 import com.iamwee.tamboon.data.Charity
 import com.iamwee.tamboon.ui.donation.complete.DonationCompleteActivity
-import com.iamwee.tamboon.utils.CurrencyFormatter
-import com.iamwee.tamboon.utils.DonationTextWatcher
-import com.iamwee.tamboon.utils.ProgressDialog
+import com.iamwee.tamboon.utils.*
 import kotlinx.android.synthetic.main.fragment_donation.*
 
 @Suppress("UNUSED_PARAMETER")
@@ -110,7 +108,7 @@ class DonationFragment : BaseFragment() {
 
     private fun launchCreditCardActivity(view: View) {
         val intent = Intent(requireContext(), CreditCardActivity::class.java).apply {
-            putExtra(CreditCardActivity.EXTRA_PKEY, "pkey_test_5atpvinwxgtf1ud4jtc")
+            putExtra(CreditCardActivity.EXTRA_PKEY, Crypto.decrypt(KeyGenerator.key, Config.pkey))
         }
         startActivityForResult(intent, CREDIT_CARD_REQUEST)
     }
