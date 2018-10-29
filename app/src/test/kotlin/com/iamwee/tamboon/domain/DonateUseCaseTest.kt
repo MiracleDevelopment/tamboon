@@ -10,7 +10,7 @@ import org.junit.Test
 
 class DonateUseCaseTest {
 
-    lateinit var useCase: DonateUseCase
+    private lateinit var useCase: DonateUseCase
 
     @Before
     fun setup() {
@@ -18,7 +18,7 @@ class DonateUseCaseTest {
     }
 
     @Test
-    fun `input donate request then should shown correct information`() {
+    fun `Input donate request then should shown information as the same`() {
         val name = "Awesome name"
         val token = "Awesome token"
         val amount = 50_000L
@@ -34,20 +34,19 @@ class DonateUseCaseTest {
     }
 
     @Test
-    fun `donate with incorrect token then donation should not success`() {
-        val result = runBlocking { useCase.execute(
-            DonationRequest(
-                name = "awesome name",
-                token = "some incorrect token that taken from omise public token",
-                amount = 4000
-            )
-        ) }
+    fun `Donate with incorrect token then donation shouldn't successfully`() {
+        val request = DonationRequest(
+            name = "awesome name",
+            token = "some incorrect token that taken from omise public token",
+            amount = 4000L
+        )
+        val result = runBlocking { useCase.execute(request) }
 
         assertEquals(false, result.success)
     }
 
     @Test
-    fun `donate with correct information then donation should successfully`() {
+    fun `Donate with correct information then donation should successfully`() {
         val result = runBlocking { useCase.execute(DataTest.correctCard) }
 
         assertEquals(true, result.success)
