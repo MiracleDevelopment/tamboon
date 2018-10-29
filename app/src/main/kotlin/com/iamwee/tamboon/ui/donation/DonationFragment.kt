@@ -1,26 +1,40 @@
 package com.iamwee.tamboon.ui.donation
 
+import android.app.Activity.RESULT_CANCELED
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.View
+import co.omise.android.models.Token
+import co.omise.android.ui.CreditCardActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.iamwee.tamboon.R
 import com.iamwee.tamboon.base.BaseFragment
 import com.iamwee.tamboon.common.observe
+import com.iamwee.tamboon.common.observeEvent
+import com.iamwee.tamboon.common.textString
 import com.iamwee.tamboon.common.viewModelProvider
 import com.iamwee.tamboon.data.Charity
+import com.iamwee.tamboon.ui.donation.complete.DonationCompleteActivity
 import com.iamwee.tamboon.utils.CurrencyFormatter
 import com.iamwee.tamboon.utils.DonationTextWatcher
+import com.iamwee.tamboon.utils.ProgressDialog
 import kotlinx.android.synthetic.main.fragment_donation.*
 
-class DonationFragment: BaseFragment() {
+@Suppress("UNUSED_PARAMETER")
+class DonationFragment : BaseFragment() {
 
     override val layoutId: Int
         get() = R.layout.fragment_donation
 
     private val viewModel by lazy {
-        viewModelProvider<DonationViewModel>(DonationViewModelFactory()) {
+        viewModelProvider<DonationViewModel>(DonationViewModelFactory(requireContext())) {
             observe(donationValidated, ::handleDonationButtonEnabled)
+            observe(failure, ::handleFailure)
+            observeEvent(showDialogEvent, ::showLoadingDialog)
+            observeEvent(dismissDialogEvent, ::dismissLoadingDialog)
+            observeEvent(donationSuccessEvent, ::launchDonationFinishActivity)
         }
     }
 
@@ -31,7 +45,6 @@ class DonationFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (charity == null) return
-
         charity?.let {
 
             textViewDonationTo.text = getString(R.string.label_donation_to, it.name)
@@ -44,12 +57,49 @@ class DonationFragment: BaseFragment() {
                 .into(imageViewCharityThumbnail)
 
             editTextDonationAmount.addTextChangedListener(DonationTextWatcher(::handleButton))
+            buttonDonation.setOnClickListener(::launchCreditCardActivity)
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            CREDIT_CARD_REQUEST -> {
+                if (resultCode == RESULT_CANCELED) {
+                    return
+                }
+
+                data?.getParcelableExtra<Token>(CreditCardActivity.EXTRA_TOKEN_OBJECT)?.let {
+                    val donateAmountSatang = editTextDonationAmount.textString.toLong().times(1000)
+                    viewModel.donate(it, donateAmountSatang)
+                }
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun handleDonationButtonEnabled(isValidated: Boolean?) {
         buttonDonation.isEnabled = isValidated == true
+    }
+
+    private fun handleFailure(e: Exception?) {
+        val errorMessage = e?.message ?: e?.localizedMessage ?: return
+        AlertDialog.Builder(requireContext())
+            .setMessage(errorMessage)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun launchDonationFinishActivity(unit: Unit) {
+        DonationCompleteActivity.launch(requireContext(), editTextDonationAmount.textString.toLong(), charity!!)
+    }
+
+    private fun showLoadingDialog(unit: Unit) {
+        ProgressDialog.show(childFragmentManager)
+    }
+
+    private fun dismissLoadingDialog(unit: Unit) {
+        ProgressDialog.dismiss(childFragmentManager)
     }
 
     private fun handleButton(amount: Long) {
@@ -61,9 +111,17 @@ class DonationFragment: BaseFragment() {
         }
     }
 
+    private fun launchCreditCardActivity(view: View) {
+        val intent = Intent(requireContext(), CreditCardActivity::class.java).apply {
+            putExtra(CreditCardActivity.EXTRA_PKEY, "pkey_test_5atpvinwxgtf1ud4jtc")
+        }
+        startActivityForResult(intent, CREDIT_CARD_REQUEST)
+    }
+
     companion object {
 
         private const val EXTRA_DONATION_FRAGMENT_CHARITY = "extra.donationfragment.charity"
+        private const val CREDIT_CARD_REQUEST = 4241
 
         fun withCharity(charity: Charity) = DonationFragment().apply {
             arguments = Bundle().apply {

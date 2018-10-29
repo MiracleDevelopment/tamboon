@@ -23,7 +23,7 @@ inline fun <reified VM : ViewModel> FragmentActivity.viewModelProvider(
 }
 
 inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
-        factory: ViewModelProvider.Factory, body: VM.() -> Unit
+        factory: ViewModelProvider.Factory, body: VM.() -> Unit = {}
 ): VM {
     val viewModel = ViewModelProviders.of(this, factory).get(VM::class.java)
     viewModel.body()
@@ -32,6 +32,9 @@ inline fun <reified VM : ViewModel> Fragment.viewModelProvider(
 
 fun <T : Any, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) =
         liveData.observe(this, Observer(body))
+
+fun <T: Any, L: LiveData<Event<T>>> LifecycleOwner.observeEvent(liveData: L, body: (T) -> Unit) =
+    liveData.observe(this, EventObserver(body))
 
 inline fun <reified T> Fragment.doOnDelegate(action: (T) -> Unit) {
     (targetFragment as? T)?.let {

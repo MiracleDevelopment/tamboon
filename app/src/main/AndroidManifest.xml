@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.iamwee.tamboon">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -25,6 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.donation.DonationActivity"/>
+
+        <activity
+                android:name="co.omise.android.ui.CreditCardActivity"
+                android:theme="@style/OmiseSDKTheme"/>
+        <activity android:name=".ui.donation.complete.DonationCompleteActivity"/>
     </application>
 
 </manifest>

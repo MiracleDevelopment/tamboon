@@ -6,8 +6,10 @@ class NetworkConnectionException : Exception() {
     get() = "Network connection hasn't connected, please check your internet connection and try again."
 }
 
-class ServerException() : Exception() {
+class ServerException : Exception() {
 
     override val message: String
         get() = "There are something when wrong while connecting to server, please try again later."
 }
+
+class ClientErrorException(override val message: String): Exception()

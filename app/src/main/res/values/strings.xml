@@ -3,6 +3,9 @@
     <string name="default_error_message">There are something when wrong, please try again later</string>
     <string name="button_donation" formatted="false">Donate %s Baht</string>
     <string name="label_amount_donation">Amount</string>
-    <string name="label_donation_to" formatted="false">Donation to %s</string>
+    <string name="label_donation_to" formatted="false">Donate to %s</string>
     <string name="button_please_fill_donation_amount">Please fill amount for donation</string>
+    <string name="title_donate_successfully">Successfully!</string>
+    <string name="message_donate_successfully">You\'ve already donated %s baht to %s.</string>
+    <string name="button_back_to_home">Back to Home</string>
 </resources>

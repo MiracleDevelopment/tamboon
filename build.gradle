@@ -17,6 +17,7 @@ buildscript {
         androidSupportVersion = '28.0.0'
         coroutineVersion = '0.26.0'
         glideVersion = '4.8.0'
+        omiseAndroidVersion = '2.6.5'
     }
 
     repositories {

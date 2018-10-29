@@ -64,6 +64,10 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
+    implementation ("co.omise:omise-android:$rootProject.omiseAndroidVersion") {
+        exclude module: 'okhttp'
+    }
+
     testImplementation "junit:junit:$rootProject.junitVersion"
     testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrestVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.mokitoKotlinVersion"
