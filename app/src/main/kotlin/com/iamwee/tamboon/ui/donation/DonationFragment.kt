@@ -34,7 +34,7 @@ class DonationFragment : BaseFragment() {
     }
 
     private val charity by lazy {
-        arguments?.getParcelable<Charity>(EXTRA_DONATION_FRAGMENT_CHARITY)
+        arguments?.getParcelable<Charity>(ARGS_DONATION_FRAGMENT_CHARITY)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,12 +115,12 @@ class DonationFragment : BaseFragment() {
 
     companion object {
 
-        private const val EXTRA_DONATION_FRAGMENT_CHARITY = "extra.donationfragment.charity"
+        private const val ARGS_DONATION_FRAGMENT_CHARITY = "args.DonationFragment.charity"
         private const val CREDIT_CARD_REQUEST = 4241
 
         fun withCharity(charity: Charity) = DonationFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(EXTRA_DONATION_FRAGMENT_CHARITY, charity)
+                putParcelable(ARGS_DONATION_FRAGMENT_CHARITY, charity)
             }
         }
 

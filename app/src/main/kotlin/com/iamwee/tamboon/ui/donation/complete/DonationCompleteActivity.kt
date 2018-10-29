@@ -46,8 +46,8 @@ class DonationCompleteActivity : BaseActivity() {
     }
 
     companion object {
-        private const val EXTRA_AMOUNT = "extra.donationcompleteactivity.amount"
-        private const val EXTRA_CHARITY = "extra.donationcompleteactivity.charity"
+        private const val EXTRA_AMOUNT = "DonationCompleteActivity.amount"
+        private const val EXTRA_CHARITY = "DonationCompleteActivity.charity"
 
         fun launch(context: Context, amount: Long, charity: Charity) {
             val intent = Intent(context, DonationCompleteActivity::class.java).apply {

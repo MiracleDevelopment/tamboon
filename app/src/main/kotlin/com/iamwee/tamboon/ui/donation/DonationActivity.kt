@@ -37,7 +37,7 @@ class DonationActivity : BaseActivity() {
 
 
     companion object {
-        private const val EXTRA_DONATION_ACTIVITY_CHARITY = "extra.donationactivity.charity"
+        private const val EXTRA_DONATION_ACTIVITY_CHARITY = "DonationActivity.charity"
         fun launch(context: Context, charity: Charity) {
             val intent = Intent(context, DonationActivity::class.java).apply {
                 putExtra(EXTRA_DONATION_ACTIVITY_CHARITY, charity)
